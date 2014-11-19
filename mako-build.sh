@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ..
 cd mako
 rm arch/arm/boot/zImage
 rm boot.img
@@ -25,7 +26,7 @@ export CCACHE=1
 export KBUILD_BUILD_USER=jmabalot
 export KBUILD_BUILD_HOST=STUXNET-KERNEL-DEVELOPMENT
 export ARCH=arm
-export CROSS_COMPILE=~/tmp/arm-eabi-4.9/bin/arm-eabi-
+export CROSS_COMPILE=/data1/Gnome/MAKO/arm-eabi-4.9/bin/arm-eabi-
 export ENABLE_GRAPHITE=true
 make mako_defconfig
 time make -j8 2>&1 | tee kernel.log
@@ -41,7 +42,7 @@ echo "building ramdisk"
 ./mkbootfs ramdisk | gzip > ramdisk.gz
 echo ""
 echo "making boot image"
-./mkbootimg --base 0x80200000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x01600000 --tags_offset 0x00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.hardware=mako lpj=67677 user_debug=31' --kernel zImage --ramdisk ramdisk.gz --output ../mako/boot.img
+./mkbootimg --kernel zImage --cmdline 'console=ttyHSL0,115200,n8 androidboot.hardware=mako lpj=67677 user_debug=31' --base 0x80200000 --pagesize 2048 --ramdisk_offset 0x01600000 --ramdisk ramdisk.gz --output ../mako/boot.img
 
 rm -rf ramdisk.gz
 rm -rf zImage

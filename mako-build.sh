@@ -21,6 +21,7 @@ git checkout Stuxnet
 
 make clean
 make mrproper
+export CCACHE=1
 export KBUILD_BUILD_USER=jmabalot
 export KBUILD_BUILD_HOST=STUXNET-KERNEL-DEVELOPMENT
 export ARCH=arm
@@ -40,7 +41,7 @@ echo "building ramdisk"
 ./mkbootfs ramdisk | gzip > ramdisk.gz
 echo ""
 echo "making boot image"
-./mkbootimg --base 80200000 --ramdisk_offset 01600000 --second_offset 00008000 --tags_offset 00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.hardware=mako lpj=67677 user_debug=31' --kernel zImage --ramdisk ramdisk.gz --output ../mako/boot.img
+./mkbootimg --base 0x80200000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x01600000 --tags_offset 0x00000100 --cmdline 'console=ttyHSL0,115200,n8 androidboot.hardware=mako lpj=67677 user_debug=31' --kernel zImage --ramdisk ramdisk.gz --output ../mako/boot.img
 
 rm -rf ramdisk.gz
 rm -rf zImage

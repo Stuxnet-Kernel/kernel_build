@@ -23,12 +23,18 @@ git checkout Stuxnet
 make clean
 make mrproper
 export CCACHE=1
-export KBUILD_BUILD_USER=jmabalot
-export KBUILD_BUILD_HOST=STUXNET-KERNEL-DEVELOPMENT
+export KBUILD_BUILD_USER=kernel-build
+export KBUILD_BUILD_HOST=jmabalot.stuxnet-kernel
 export ARCH=arm
-export CROSS_COMPILE=/data1/Gnome/MAKO/arm-eabi-4.9/bin/arm-eabi-
+export CROSS_COMPILE=/data1/Gnome/Stuxnet/arm-eabi-4.9/bin/arm-eabi-
 export ENABLE_GRAPHITE=true
+version="1"
 make mako_defconfig
+
+if [ $# -gt 0 ]; then
+echo $1 > .version
+fi
+
 time make -j8 2>&1 | tee kernel.log
 
 echo ""
@@ -49,7 +55,7 @@ rm -rf zImage
 
 cd ../mako/
 
-zipfile="Stuxnet.zip"
+zipfile="Stuxnet-v$version.zip"
 echo ""
 echo "zipping kernel"
 cp boot.img zip/

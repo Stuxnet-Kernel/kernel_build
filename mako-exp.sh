@@ -1,7 +1,6 @@
 #!/bin/bash
 
-cd ..
-cd mako
+cd ../mako
 rm arch/arm/boot/zImage
 rm boot.img
 rm kernel.log
@@ -18,17 +17,18 @@ echo "* Its your responsibility upon building my kernel. *"
 echo "****************************************************"
 echo ""
 
-git checkout Stuxnet
+git checkout exp
 
 make clean
 make mrproper
 export CCACHE=1
 export KBUILD_BUILD_USER=kernel-build
 export KBUILD_BUILD_HOST=jmabalot.stuxnet-kernel
+export CONFIG_LOCALVERSION=-Stuxnet-exp
 export ARCH=arm
 export CROSS_COMPILE=/data1/Gnome/Stuxnet/arm-eabi-4.9/bin/arm-eabi-
 export ENABLE_GRAPHITE=true
-version="1"
+version="2.75"
 make mako_defconfig
 
 if [ $# -gt 0 ]; then
@@ -55,7 +55,7 @@ rm -rf zImage
 
 cd ../mako/
 
-zipfile="Stuxnet-v$version.zip"
+zipfile="Stuxnet-exp-v$version.zip"
 echo ""
 echo "zipping kernel"
 cp boot.img zip/

@@ -12,7 +12,7 @@ echo "* Its your responsibility upon building my kernel. *"
 echo "****************************************************"
 echo ""
 
-git checkout Stuxnet
+git checkout cm-12
 
 make clean
 make mrproper
@@ -48,7 +48,7 @@ rm -rf zImage
 
 cd ../mako/
 
-zipfile="Stuxnet-v$version.zip"
+zipfile="Stuxnet-cm-v$version.zip"
 echo ""
 echo "zipping kernel"
 cp boot.img zip/

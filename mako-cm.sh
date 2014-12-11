@@ -32,9 +32,9 @@ time make -j8 2>&1 | tee kernel.log
 
 echo ""
 echo "Building boot.img"
-cp arch/arm/boot/zImage ../ramdisk/
+cp arch/arm/boot/zImage ../cyanogenmod/
 
-cd ../ramdisk/
+cd ../cyanogenmod/
 
 echo ""
 echo "building ramdisk"
@@ -53,7 +53,7 @@ echo ""
 echo "zipping kernel"
 cp boot.img zip/
 
-rm -rf ../ramdisk/boot.img
+rm -rf ../cyanogenmod/boot.img
 
 cd zip/
 rm -f *.zip

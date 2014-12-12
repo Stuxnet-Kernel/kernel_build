@@ -20,7 +20,7 @@ export CCACHE=1
 export ARCH=arm
 export CROSS_COMPILE=~/tmp/arm-eabi-4.9/bin/arm-eabi-
 export ENABLE_GRAPHITE=true
-version="4.2"
+version="4.3"
 export CONFIG_DEBUG_SECTION_MISMATCH=y
 make mako_defconfig
 
